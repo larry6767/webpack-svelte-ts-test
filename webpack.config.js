@@ -11,6 +11,13 @@ module.exports = {
     filename: "bundle.js",
     publicPath: "/",
   },
+  resolve: {
+    alias: {
+      svelte: path.resolve("node_modules", "svelte"),
+    },
+    extensions: [".mjs", ".js", ".svelte"],
+    conditionNames: ["svelte"],
+  },
   module: {
     rules: [
       {
