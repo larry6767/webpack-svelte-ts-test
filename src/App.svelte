@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     let name = process.env.name
 </script>
 
