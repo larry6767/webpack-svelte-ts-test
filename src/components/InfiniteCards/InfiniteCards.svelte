@@ -1,5 +1,14 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
+  import CardList from "./CardList/CardList.svelte";
+  import Card from "./Card/Card.svelte";
+
+  let infiniteCardsTimer = process.env.infiniteCardsTimer;
+  if (!infiniteCardsTimer)
+    throw new Error("You must to pass '.env' variables! See '.env.example.'");
+
+  let buttonRef: HTMLButtonElement;
+  $: buttonHeight = buttonRef?.clientHeight || 46; // 46 is default value
 
   let cards: Array<number | undefined> = [1];
   let interval: number;
@@ -7,24 +16,26 @@
   onDestroy(() => clearInterval(interval));
 
   onMount(function () {
-    interval = setInterval(addNewCard, 10000);
+    interval = setInterval(addNewCard, infiniteCardsTimer);
   });
 
   async function addNewCard() {
     clearInterval(interval);
     cards = [...cards, 1];
-    interval = setInterval(addNewCard, 10000);
+    interval = setInterval(addNewCard, infiniteCardsTimer);
   }
 </script>
 
 <div class="infinite-cards">
-  <div>
+  <CardList {buttonHeight}>
     {#each cards as _}
-      <div>xxx</div>
+      <Card />
     {/each}
-  </div>
+  </CardList>
 
-  <button class="button" on:click={addNewCard}>add new card</button>
+  <button class="button" on:click={addNewCard} bind:this={buttonRef}>
+    add new card
+  </button>
 </div>
 
 <style lang="less">
@@ -42,17 +53,17 @@
     width: 280px;
     padding: 15px;
     border: none;
-    border-radius: 5px;
-    background: @primary-2;
+    border-radius: @border-radius;
+    background: @primary-1;
     text-transform: capitalize;
     cursor: pointer;
 
     &:hover {
-      background: @primary-1;
+      background: @primary-2;
     }
 
     &:disabled {
-      background: @primary-2;
+      background: @primary-1;
       cursor: not-allowed;
     }
   }
