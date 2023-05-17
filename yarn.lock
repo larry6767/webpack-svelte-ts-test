@@ -3196,11 +3196,6 @@ svelte-hmr@^0.14.2:
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.12.tgz#a127aec02f1896500b10148b2d4d21ddde39973f"
   integrity sha512-4QSW/VvXuqVcFZ+RhxiR8/newmwOCTlbYIezvkeN6302YFRE8cXy0naamHcjz8Y9Ce3ITTZtrHrIL0AGfyo61w==
 
-svelte-inline-svg@^1.0.8:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/svelte-inline-svg/-/svelte-inline-svg-1.2.0.tgz#83a0d611ebcef412e550260bf972cda35ce4e19f"
-  integrity sha512-mYyvz7uddfaj/yXB5zyAyYSPUyE7vdK8En7dGJjZf3XImdAfOuDxhNn5OFF84BQeJFVZ7T8/rJU33emiHKdLhQ==
-
 svelte-loader@^3.1.0:
   version "3.1.7"
   resolved "https://registry.yarnpkg.com/svelte-loader/-/svelte-loader-3.1.7.tgz#b6acc02380b3cfe08340a08fe6831474fe4d56cb"

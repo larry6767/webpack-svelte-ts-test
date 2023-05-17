@@ -95,7 +95,7 @@
     display: flex;
     flex-direction: column;
     width: 280px;
-    min-height: 400px;
+    min-height: 420px;
     flex-shrink: 0;
     margin-bottom: 20px;
     background: @primary-1;
