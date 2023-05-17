@@ -25,16 +25,23 @@
     cards = [...cards, 1];
     interval = setInterval(addNewCard, infiniteCardsTimer);
   }
+
+  let isPending = true;
 </script>
 
 <div class="infinite-cards">
   <CardList {buttonHeight}>
     {#each cards as _}
-      <Card />
+      <Card bind:isPending />
     {/each}
   </CardList>
 
-  <button class="button" on:click={addNewCard} bind:this={buttonRef}>
+  <button
+    class="button"
+    on:click={addNewCard}
+    bind:this={buttonRef}
+    disabled={isPending}
+  >
     add new card
   </button>
 </div>

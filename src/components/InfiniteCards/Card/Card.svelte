@@ -6,6 +6,8 @@
   import Image from "../../shared/Image/Image.svelte";
   import { envErrorMessage } from "../../../constants";
 
+  export let isPending = true;
+
   const urlForFetchingData = process.env.urlForFetchingData;
   const nextFetchAttemptTime = process.env.nextFetchAttemptTime;
   const urlForFetchingImages = process.env.urlForFetchingImages;
@@ -16,11 +18,13 @@
   let timeoutId: number;
 
   onMount(async () => {
+    isPending = true;
     try {
       await fetchData();
     } catch {
       timeoutId = setTimeout(fetchData, nextFetchAttemptTime);
     }
+    isPending = false;
   });
 
   onDestroy(() => {
