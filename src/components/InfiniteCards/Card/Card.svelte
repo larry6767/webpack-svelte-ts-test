@@ -42,8 +42,7 @@
     return {
       duration,
       css: (t: number) => {
-        return `
-					transform: scale(${t});`;
+        return `transform: scale(${t});`;
       },
     };
   }
