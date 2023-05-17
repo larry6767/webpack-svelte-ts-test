@@ -1,5 +1,6 @@
 <script lang="ts">
   import "normalize.css";
+  // local libs
   import InfiniteCards from "./components/InfiniteCards/InfiniteCards.svelte";
 </script>
 
