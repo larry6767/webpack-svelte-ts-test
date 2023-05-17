@@ -1,11 +1,12 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
+  // local libs
   import CardList from "./CardList/CardList.svelte";
   import Card from "./Card/Card.svelte";
+  import { envErrorMessage } from "../../constants";
 
-  let infiniteCardsTimer = process.env.infiniteCardsTimer;
-  if (!infiniteCardsTimer)
-    throw new Error("You must to pass '.env' variables! See '.env.example.'");
+  const infiniteCardsTimer = process.env.infiniteCardsTimer;
+  if (!infiniteCardsTimer) throw new Error(envErrorMessage);
 
   let buttonRef: HTMLButtonElement;
   $: buttonHeight = buttonRef?.clientHeight || 46; // 46 is default value

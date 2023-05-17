@@ -1,19 +1,38 @@
 <script lang="ts">
   import type { CardModel } from "./types";
-  import { onMount } from "svelte";
+  // libs
+  import { onMount, onDestroy } from "svelte";
+  // local libs
+  import Image from "../../shared/Image/Image.svelte";
+  import { envErrorMessage } from "../../../constants";
 
-  let urlForFetchingData = process.env.urlForFetchingData;
-  if (!urlForFetchingData)
-    throw new Error("You must to pass '.env' variables! See '.env.example.'");
+  const urlForFetchingData = process.env.urlForFetchingData;
+  const nextFetchAttemptTime = process.env.nextFetchAttemptTime;
+  const urlForFetchingImages = process.env.urlForFetchingImages;
+  if (!urlForFetchingData || !nextFetchAttemptTime || !urlForFetchingImages)
+    throw new Error(envErrorMessage);
 
   let card: CardModel | null = null;
+  let timeoutId: number;
 
   onMount(async () => {
+    try {
+      await fetchData();
+    } catch {
+      timeoutId = setTimeout(fetchData, nextFetchAttemptTime);
+    }
+  });
+
+  onDestroy(() => {
+    clearTimeout(timeoutId);
+  });
+
+  async function fetchData() {
     const response = await fetch(
       `${urlForFetchingData}/api/coffee/random_coffee`
     );
     card = await response.json();
-  });
+  }
 
   function appearance(_: unknown, { duration }: { duration: number }) {
     return {
@@ -28,7 +47,9 @@
 
 <div class="card" in:appearance={{ duration: 500 }}>
   <div class="image-wrapper plug">
-    <img src="" alt="" />
+    {#if card}
+      <Image src={urlForFetchingImages} alt="coffee bean" />
+    {/if}
   </div>
 
   <div class="card-body">

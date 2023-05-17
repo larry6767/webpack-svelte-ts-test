@@ -102,7 +102,7 @@ exports.svelte = (mode) => {
       alias: {
         svelte: path.resolve("node_modules", "svelte"),
       },
-      extensions: [".mjs", ".js", ".svelte", "ts"],
+      extensions: [".mjs", ".js", ".svelte", ".ts"],
       mainFields: ["svelte", "browser", "module", "main"],
       conditionNames: ["svelte"],
     },
